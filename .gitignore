@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Production builds & artifacts
+dist/
+electron-dist/
+release/
+*.exe
+*.msix
+*.7z
+*.blockmap
+*.zip
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env
+.env.local
+.env.*.local

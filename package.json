@@ -1,0 +1,86 @@
+{
+  "name": "docuflow-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "DocuFlow Studio Pro — Universal Document Fusion & PDF Engineering Workstation for Anything",
+  "author": "Burhanuddin Sounasath",
+  "type": "module",
+  "main": "electron-dist/main.js",
+  "scripts": {
+    "dev:vite": "vite",
+    "dev:electron": "cross-env NODE_ENV=development electron .",
+    "dev": "npm run build:electron && concurrently -k \"npm run dev:vite\" \"wait-on tcp:5174 && cross-env NODE_ENV=development electron .\"",
+    "build:vite": "vite build",
+    "build:electron": "node -e \"require('fs').mkdirSync('electron-dist',{recursive:true});require('fs').writeFileSync('electron-dist/package.json','{\\\"type\\\":\\\"commonjs\\\"}')\" && tsc -p tsconfig.electron.json",
+    "build": "npm run build:vite && npm run build:electron",
+    "dist": "npm run build && electron-builder --win --publish never",
+    "deploy:anything": "node scripts/deploy-to-anything.cjs"
+  },
+  "build": {
+    "appId": "com.burhanuddin.docuflowstudio",
+    "productName": "DocuFlow Studio",
+    "directories": {
+      "output": "release"
+    },
+    "artifactName": "${productName}_${version}.${ext}",
+    "files": [
+      "dist/**/*",
+      "electron-dist/**/*",
+      "public/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "**/node_modules/dwg2dxf-converter/**/*"
+    ],
+    "win": {
+      "icon": "public/icon.ico",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "portable": {
+      "artifactName": "DocuFlow_Studio_${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "DocuFlow Studio",
+      "artifactName": "DocuFlow_Studio_${version}_Setup.${ext}"
+    }
+  },
+  "dependencies": {
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "dwg2dxf-converter": "^1.0.4",
+    "dxf-parser": "^1.1.2",
+    "jspdf": "^2.5.2",
+    "jszip": "^3.10.1",
+    "lucide-react": "^0.475.0",
+    "mammoth": "^1.8.0",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.10.38",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tesseract.js": "^7.0.0",
+    "wait-on": "^8.0.2",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "electron": "^34.2.0",
+    "electron-builder": "^25.1.8",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.3",
+    "vite": "^6.1.0"
+  }
+}

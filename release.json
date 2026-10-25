@@ -1,0 +1,35 @@
+{
+  "appId": "docuflow-studio",
+  "appName": "DocuFlow Studio Pro",
+  "version": "1.0.0",
+  "executableName": "DocuFlow_Studio_1.0.0.exe",
+  "releaseDate": "2026-10-24",
+  "releaseType": "major",
+  "tagline": "Universal Document Fusion, Vector Engineering & Offline PDF Suite for Anything",
+  "summary": "DocuFlow Studio Pro introduces Adobe-class document engineering to the Anything ecosystem: universal heterogeneous document fusion, visual PDF page reordering and splitting, offline OCR vision, 1-to-1 batch office conversion, security & compression, and CAD blueprint rendering.",
+  "newFeatures": [
+    "Adobe Creative Cloud visual design identity with signature Df monogram tile and specular rim",
+    "PDF Page Studio & Visual Splitter: Thumbnail grid to reorder, rotate 90°, delete pages, extract ranges (e.g., 1-3, 5), or split all to ZIP",
+    "Offline OCR Vision Extractor: Client-side optical character recognition via Tesseract for scanned and flattened PDFs",
+    "1-to-1 Batch Office Converter: Convert dozens of Word and Excel documents to individual PDFs with direct folder saving or ZIP export",
+    "Security & Optimization Suite: Diagonal watermark stamps, sequential page numbering, multi-tier document compression, and user password protection",
+    "In-App Instant PDF Previewer: Built-in high-DPI canvas viewer with page navigation, zoom, and rotation",
+    "Heterogeneous Multi-Document Staggered Fusion: Combine arbitrary combinations of Word, Excel, CAD DXF, Images, Text, and PDFs into one publication",
+    "AutoCAD CAD-to-PDF Studio: Direct vector DXF parsing with Blueprint, Monochrome, and Layer Color themes up to A1 paper size"
+  ],
+  "improvements": [
+    "Native Anything ecosystem integration with customized startup loader and auto-update support",
+    "100% Client-side sandbox execution with zero cloud uploads and local PDF.js worker",
+    "Fluid Windows 11 Liquid Glass UI with SF Pro Display typography and frosted scrollbars"
+  ],
+  "fixes": [
+    "Resolved tab switching synchronization and titlebar state in master workspace",
+    "Fixed TypeScript ArrayBuffer and BlobPart compatibility across all studio modules"
+  ],
+  "emailNotification": {
+    "subject": "🚀 DocuFlow Studio Pro is Live in Anything!",
+    "preview": "Discover universal document fusion, visual page splitting, offline OCR vision, and batch conversion.",
+    "ctaText": "Launch DocuFlow Studio",
+    "heroGradient": "from-cyan-500 via-sky-600 to-blue-700"
+  }
+}
