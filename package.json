@@ -14,6 +14,8 @@
     "build:electron": "node -e \"require('fs').mkdirSync('electron-dist',{recursive:true});require('fs').writeFileSync('electron-dist/package.json','{\\\"type\\\":\\\"commonjs\\\"}')\" && tsc -p tsconfig.electron.json",
     "build": "npm run build:vite && npm run build:electron",
     "dist": "npm run build && electron-builder --win --publish never",
+    "postdist": "node scripts/publish-release.cjs",
+    "release": "npm run dist",
     "deploy:anything": "node scripts/deploy-to-anything.cjs"
   },
   "build": {
