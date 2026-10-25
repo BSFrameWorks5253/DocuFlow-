@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const https = require('https');
 
-const REPO_OWNER = 'BSFrameworks5253';
+const REPO_OWNER = 'BSFrameWorks5253';
 const REPO_NAME = 'DocuFlow-';
 const TAG_NAME = 'v1.0.0';
 const RELEASE_TITLE = 'DocuFlow Studio Pro v1.0.0';
@@ -157,6 +157,24 @@ async function main() {
     if (!fs.existsSync(fullPath)) {
       console.warn(`⚠️ File not found: ${f}`);
       continue;
+    }
+
+    // Check if asset already exists
+    if (release.assets && release.assets.length > 0) {
+      const existingAsset = release.assets.find(a => a.name === f);
+      if (existingAsset) {
+        console.log(`🗑️ Deleting existing asset ${f} (ID: ${existingAsset.id})...`);
+        await request({
+          hostname: 'api.github.com',
+          path: `/repos/${REPO_OWNER}/${REPO_NAME}/releases/assets/${existingAsset.id}`,
+          method: 'DELETE',
+          headers: {
+            'User-Agent': 'DocuFlow-Publisher',
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+      }
     }
 
     console.log(`⬆️ Uploading ${f} (${(fs.statSync(fullPath).size / (1024 * 1024)).toFixed(1)} MB)...`);
