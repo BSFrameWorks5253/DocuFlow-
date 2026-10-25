@@ -62,14 +62,18 @@ if (fs.existsSync(sourcesPath)) {
     let sources = JSON.parse(fs.readFileSync(sourcesPath, 'utf-8'));
     // Filter out old master-converter and replace with docuflow-studio
     sources = sources.filter(s => s.id !== 'master-converter' && s.name !== 'Master Document Converter Pro');
-    if (!sources.some(s => s.id === APP_ID || s.name === APP_NAME)) {
-      sources.push({
-        id: APP_ID,
-        name: APP_NAME,
-        url: 'https://github.com/BSFrameWorks5253/DocuFlow-Studio',
-        category: 'Productivity & Documents',
-        autoSync: true
-      });
+    const existingIdx = sources.findIndex(s => s.id === APP_ID || s.name === APP_NAME);
+    const sourceEntry = {
+      id: APP_ID,
+      name: APP_NAME,
+      url: 'https://github.com/BSFrameworks5253/DocuFlow-',
+      category: 'Productivity & Documents',
+      autoSync: true
+    };
+    if (existingIdx >= 0) {
+      sources[existingIdx] = sourceEntry;
+    } else {
+      sources.push(sourceEntry);
     }
     fs.writeFileSync(sourcesPath, JSON.stringify(sources, null, 2), 'utf-8');
     console.log('✓ Registered in app-sources.json');
