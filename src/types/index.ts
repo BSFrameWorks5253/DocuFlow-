@@ -67,6 +67,12 @@ export interface ElectronAPI {
   saveFileToFolder: (options: { folderPath: string; fileName: string; buffer: ArrayBuffer }) => Promise<string>;
   saveFilesBatch: (options: { baseDir: string; subFolder?: string; files: Array<{ name: string; buffer: ArrayBuffer }> }) => Promise<{ targetDir: string; savedPaths: string[] }>;
   convertDwgToDxf: (dwgBuffer: ArrayBuffer) => Promise<{ success: boolean; dxfContent?: string; error?: string }>;
+  checkForUpdates: (customDir?: string) => Promise<any>;
+  downloadUpdate: (options: { downloadUrl: string; setupName: string }) => Promise<string>;
+  installUpdate: (installerPath?: string) => Promise<{ success: boolean }>;
+  onUpdateAvailable: (callback: (data: any) => void) => () => void;
+  onUpdateProgress: (callback: (data: any) => void) => () => void;
+  onUpdateDownloaded: (callback: (data: any) => void) => () => void;
 }
 
 declare global {
