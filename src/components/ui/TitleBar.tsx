@@ -80,7 +80,7 @@ export const TitleBar: React.FC<TitleBarProps> = ({
               DocuFlow Studio <span className="text-[10px] uppercase font-extrabold px-1.5 py-0.5 rounded bg-sky-50 text-sky-600 border border-sky-200">PRO</span>
             </span>
             <span className="font-mono text-[10px] text-slate-400 font-semibold">
-              v1.0.0
+              v26.10.26
             </span>
           </div>
 

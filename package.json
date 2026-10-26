@@ -1,8 +1,8 @@
 {
   "name": "docuflow-studio",
   "private": true,
-  "version": "1.0.0",
-  "description": "DocuFlow Studio Pro — Universal Document Fusion & PDF Engineering Workstation for Anything",
+  "version": "26.10.26",
+  "description": "DocuFlow Studio Pro \u2014 Universal Document Fusion & PDF Engineering Workstation for Anything",
   "author": "Burhanuddin Sounasath",
   "type": "module",
   "main": "electron-dist/main.js",
