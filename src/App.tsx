@@ -85,7 +85,7 @@ export const App: React.FC = () => {
         <div className="flex items-center gap-2 font-medium">
           <span className="font-bold text-slate-900">DocuFlow Studio Pro</span>
           <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200/80 font-semibold">
-            v26.10.27
+            v26.10.30
           </span>
         </div>
 

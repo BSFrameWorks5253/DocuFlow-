@@ -26,10 +26,19 @@ export class DocuFlowAutoUpdater {
   private static downloadedInstallerPath: string | null = null;
 
   public static resolveAnythingDir(customPath?: string): string | null {
+    const cliArg = process.argv.find((a) => a.startsWith('--anything-dir='))?.split('=')[1];
+    const appData = process.env.APPDATA || (process.env.USERPROFILE ? path.join(process.env.USERPROFILE, 'AppData', 'Roaming') : '');
+
     const candidates = [
       customPath,
+      cliArg,
+      process.env.ANYTHING_DIR,
+      process.env.ANYTHING_ECOSYSTEM_PATH,
       this.DEFAULT_ANYTHING_DIR,
+      'C:\\Users\\Burhanuddin\\OneDrive\\Desktop\\Anything\\Anything',
       'C:\\Users\\Burhanuddin\\OneDrive\\Desktop\\Anything',
+      appData ? path.join(appData, 'Anything') : '',
+      appData ? path.join(appData, 'anything') : '',
       path.resolve(process.cwd(), '..', 'Anything', 'Anything'),
       path.resolve(process.cwd(), '..', 'Anything'),
       path.resolve(app.getAppPath(), '..', 'Anything', 'Anything'),
@@ -65,6 +74,37 @@ export class DocuFlowAutoUpdater {
     anythingDirPath?: string
   ): Promise<DocuFlowUpdateInfo> {
     const currentVer = (app.getVersion() || '1.0.0').replace(/^[vV]/, '').trim();
+
+    // 0. Probe Anything Local Hub Server (port 49153)
+    try {
+      const hubData = await this.fetchJson('http://127.0.0.1:49153/api/catalog');
+      if (hubData && Array.isArray(hubData.apps)) {
+        const item = hubData.apps.find((a: any) =>
+          a.id === 'docuflow-studio' || a.id === 'docuflow' || (typeof a.name === 'string' && a.name.toLowerCase().includes('docuflow'))
+        );
+        if (item && item.version) {
+          const remoteVer = item.version.replace(/^[vV]/, '').trim();
+          const newer = this.compareVersions(remoteVer, currentVer) > 0;
+          const setupName = item.setupExecutableName || `DocuFlow_Studio_${remoteVer}_Setup.exe`;
+          const downloadUrl = 'http://127.0.0.1:49153/api/download-package/docuflow-studio';
+          const updateInfo: DocuFlowUpdateInfo = {
+            version: remoteVer,
+            latestVersion: remoteVer,
+            currentVersion: currentVer,
+            hasUpdate: newer,
+            downloadUrl,
+            setupName,
+            source: 'anything-catalog',
+            releaseNotes: item.changelog || ['Fast Local LAN Update via Anything Hub Server'],
+            sizeFormatted: item.packageSize || '88.5 MB',
+          };
+          if (newer && mainWindow && !mainWindow.isDestroyed()) {
+            mainWindow.webContents.send('update:available', updateInfo);
+          }
+          if (newer) return updateInfo;
+        }
+      }
+    } catch {}
 
     // 1. Check Anything Hub
     const resolvedAnythingDir = this.resolveAnythingDir(anythingDirPath);
@@ -139,7 +179,11 @@ export class DocuFlowAutoUpdater {
 
   private static checkAnythingEcosystem(anythingDir: string, currentVer: string): DocuFlowUpdateInfo | null {
     try {
-      const catalogPath = path.join(anythingDir, 'published-apps', 'catalog.json');
+      let catalogPath = path.join(anythingDir, 'published-apps', 'catalog.json');
+      if (!fs.existsSync(catalogPath)) {
+        const alt = path.join(anythingDir, 'ecosystem_catalog.json');
+        if (fs.existsSync(alt)) catalogPath = alt;
+      }
       if (fs.existsSync(catalogPath)) {
         const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
         const entry = catalog.find((a: any) => a.id === 'docuflow-studio' || (a.name && a.name.toLowerCase().includes('docuflow')));
@@ -253,7 +297,8 @@ export class DocuFlowAutoUpdater {
       throw new Error('No downloaded installer found to execute');
     }
 
-    const child = spawn(targetPath, [], {
+    const installArgs = process.platform === 'win32' ? ['/S'] : [];
+    const child = spawn(targetPath, installArgs, {
       detached: true,
       stdio: 'ignore'
     });
@@ -263,7 +308,8 @@ export class DocuFlowAutoUpdater {
 
   private static fetchJson(url: string): Promise<any> {
     return new Promise((resolve, reject) => {
-      https.get(
+      const client = url.startsWith('http://') ? http : https;
+      client.get(
         url,
         {
           headers: {

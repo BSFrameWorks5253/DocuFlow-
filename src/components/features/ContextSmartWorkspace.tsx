@@ -954,7 +954,7 @@ export const ContextSmartWorkspace: React.FC<ContextSmartWorkspaceProps> = ({ on
               <span className="size-2 rounded-full bg-sky-500"></span>
               <span className="font-bold text-slate-900">DocuFlow Studio Pro</span>
               <span className="text-slate-300">•</span>
-              <span className="font-mono text-slate-500 text-[11px]">v26.10.26</span>
+              <span className="font-mono text-slate-500 text-[11px]">v26.10.30</span>
               <span className="text-slate-300">•</span>
               <span className="text-slate-600 font-medium">Burhanuddin Sounasath</span>
             </div>
