@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Grid,
-  Sparkles,
+  UploadCloud,
   PenTool,
   Layers,
   Scissors,
@@ -9,7 +9,8 @@ import {
   RefreshCcw,
   Image as ImageIcon,
   FileSpreadsheet,
-  Compass
+  Compass,
+  FileDigit
 } from 'lucide-react';
 import { NavigationTab } from '../../types';
 
@@ -26,6 +27,7 @@ export const NavigationRibbon: React.FC<NavigationRibbonProps> = ({
     id: NavigationTab;
     label: string;
     icon: any;
+    badge?: string;
   }> = [
     {
       id: 'all-tools',
@@ -35,7 +37,8 @@ export const NavigationRibbon: React.FC<NavigationRibbonProps> = ({
     {
       id: 'workspace',
       label: 'Auto Dropzone',
-      icon: Sparkles
+      icon: UploadCloud,
+      badge: 'Batch'
     },
     {
       id: 'pdf-editor',
@@ -44,7 +47,7 @@ export const NavigationRibbon: React.FC<NavigationRibbonProps> = ({
     },
     {
       id: 'pdf-merge',
-      label: 'Merge PDF',
+      label: 'Merge & Fusion',
       icon: Layers
     },
     {
@@ -55,22 +58,13 @@ export const NavigationRibbon: React.FC<NavigationRibbonProps> = ({
     {
       id: 'pdf-organizer',
       label: 'Page Studio',
-      icon: Layers
+      icon: FileDigit
     },
     {
-      id: 'pdf-security',
-      label: 'Security & Watermark',
-      icon: ShieldCheck
-    },
-    {
-      id: 'reverse-suite',
-      label: 'PDF to Office & Images',
-      icon: RefreshCcw
-    },
-    {
-      id: 'image-gallery',
-      label: 'Photos to PDF & Word',
-      icon: ImageIcon
+      id: 'cad-studio',
+      label: 'CAD Blueprint',
+      icon: Compass,
+      badge: 'DWG'
     },
     {
       id: 'office-suite',
@@ -78,15 +72,25 @@ export const NavigationRibbon: React.FC<NavigationRibbonProps> = ({
       icon: FileSpreadsheet
     },
     {
-      id: 'cad-studio',
-      label: 'CAD to Blueprint',
-      icon: Compass
+      id: 'reverse-suite',
+      label: 'PDF to Office & OCR',
+      icon: RefreshCcw
+    },
+    {
+      id: 'image-gallery',
+      label: 'Photos to PDF',
+      icon: ImageIcon
+    },
+    {
+      id: 'pdf-security',
+      label: 'Security & Stamp',
+      icon: ShieldCheck
     }
   ];
 
   return (
-    <div className="h-12 bg-white border-b border-slate-200/90 px-4 flex items-center justify-between select-none shadow-2xs shrink-0">
-      <div className="flex items-center gap-1.5 overflow-x-auto custom-scrollbar py-1">
+    <div className="h-12 bg-white border-b border-slate-200/90 px-3 flex items-center justify-between select-none shadow-2xs shrink-0">
+      <div className="flex items-center gap-1.5 overflow-x-auto custom-scrollbar py-1 w-full">
         {tabs.map((t) => {
           const Icon = t.icon;
           const isActive = currentTab === t.id;
@@ -95,14 +99,21 @@ export const NavigationRibbon: React.FC<NavigationRibbonProps> = ({
             <button
               key={t.id}
               onClick={() => onTabChange(t.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 border ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all shrink-0 border cursor-pointer ${
                 isActive
                   ? 'bg-slate-900 text-white border-slate-900 shadow-xs font-bold'
-                  : 'text-slate-600 hover:text-slate-900 bg-white hover:bg-slate-100/70 border-slate-200/80'
+                  : 'text-slate-600 border-transparent hover:text-slate-900 hover:bg-slate-100 hover:border-slate-200/60'
               }`}
             >
-              <Icon className={`size-3.5 ${isActive ? 'text-white' : 'text-slate-500'}`} />
-              <span className="leading-none">{t.label}</span>
+              <Icon className={`size-3.5 ${isActive ? 'text-indigo-400' : 'text-slate-500'}`} />
+              <span>{t.label}</span>
+              {t.badge && (
+                <span className={`text-[9.5px] px-1 py-0.2 rounded font-mono font-bold uppercase ${
+                  isActive ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-500 border border-slate-200'
+                }`}>
+                  {t.badge}
+                </span>
+              )}
             </button>
           );
         })}

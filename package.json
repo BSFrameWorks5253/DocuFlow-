@@ -1,8 +1,8 @@
 {
-  "name": "docuflow-studio",
+  "name": "pdf-master-pro",
   "private": true,
   "version": "1.0.0",
-  "description": "DocuFlow Studio Pro — Universal Document Fusion & PDF Engineering Workstation for Anything",
+  "description": "PDF Master Pro — Universal PDF & Document Engineering Workstation for Anything",
   "author": "Burhanuddin Sounasath",
   "type": "module",
   "main": "electron-dist/main.js",
@@ -19,8 +19,8 @@
     "deploy:anything": "node scripts/deploy-to-anything.cjs"
   },
   "build": {
-    "appId": "com.burhanuddin.docuflowstudio",
-    "productName": "DocuFlow Studio",
+    "appId": "com.burhanuddin.pdfmasterpro",
+    "productName": "PDF Master Pro",
     "directories": {
       "output": "release"
     },
@@ -43,7 +43,7 @@
       ]
     },
     "portable": {
-      "artifactName": "DocuFlow_Studio_${version}.${ext}"
+      "artifactName": "PDF_Master_Pro_${version}.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -51,8 +51,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "DocuFlow Studio",
-      "artifactName": "DocuFlow_Studio_${version}_Setup.${ext}"
+      "shortcutName": "PDF Master Pro",
+      "artifactName": "PDF_Master_Pro_${version}_Setup.${ext}"
     }
   },
   "dependencies": {

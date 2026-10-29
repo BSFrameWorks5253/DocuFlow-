@@ -30,10 +30,10 @@ const token = process.argv[2] || process.env.GH_TOKEN || process.env.GITHUB_TOKE
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 const version = pkg.version || '1.0.0';
 const TAG_NAME = `v${version}`;
-const RELEASE_TITLE = `DocuFlow Studio Pro v${version}`;
+const RELEASE_TITLE = `PDF Master Pro v${version}`;
 
 if (!token) {
-  console.log('\n⚠️  [DocuFlow Auto-Release] No GitHub Token found.');
+  console.log('\n⚠️  [PDF Master Auto-Release] No GitHub Token found.');
   console.log('   Add GH_TOKEN=your_token to your .env file, or pass it via:');
   console.log('   node scripts/publish-release.cjs <TOKEN>\n');
   process.exit(0); // Exit cleanly so build doesn't break if building without token
@@ -217,10 +217,16 @@ async function main() {
 
   // 3. Find files to upload
   const releaseDir = path.join(__dirname, '..', 'release');
-  const filesToUpload = [
-    `DocuFlow_Studio_${version}_Setup.exe`,
-    `DocuFlow_Studio_${version}.exe`
-  ];
+  let filesToUpload = [];
+  if (fs.existsSync(releaseDir)) {
+    filesToUpload = fs.readdirSync(releaseDir).filter(f => f.endsWith('.exe') && !f.includes('unpacked'));
+  }
+  if (filesToUpload.length === 0) {
+    filesToUpload = [
+      `PDF_Master_Pro_${version}_Setup.exe`,
+      `PDF_Master_Pro_${version}.exe`
+    ];
+  }
 
   let uploadedCount = 0;
   for (const f of filesToUpload) {
