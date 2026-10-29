@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 
 const ANYTHING_ROOT = 'C:\\Users\\Burhanuddin\\OneDrive\\Desktop\\Anything\\Anything';
 const APP_ID = 'docuflow-studio';
-const APP_NAME = 'DocuFlow Studio Pro';
+const APP_NAME = 'PDF Master Pro';
 const APP_VERSION = 'v1.0.0';
 
 console.log(`🚀 Deploying ${APP_NAME} as a child of Anything at:`, ANYTHING_ROOT);

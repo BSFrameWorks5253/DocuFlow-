@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { TitleBar } from './components/ui/TitleBar';
-import { NavigationRibbon } from './components/ui/NavigationRibbon';
 import { PdfellaAllToolsHub } from './components/features/PdfellaAllToolsHub';
 import { ContextSmartWorkspace } from './components/features/ContextSmartWorkspace';
 import { PdfEditorStudio } from './components/features/PdfEditorStudio';
@@ -20,16 +19,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen w-screen bg-[#F8FAFC] text-slate-800 select-none overflow-hidden font-sans">
-      {/* 1. Light Studio TitleBar */}
-      <TitleBar queueCount={activeQueueCount} />
-
-      {/* 2. PDFella Tool Directory Ribbon */}
-      <NavigationRibbon
+      {/* 1. Unified Light Studio TitleBar & Navigation */}
+      <TitleBar 
+        queueCount={activeQueueCount} 
         currentTab={currentTab}
-        onTabChange={(tab) => setCurrentTab(tab)}
+        onSelectTab={(tab) => setCurrentTab(tab)}
       />
 
-      {/* 3. Main Stage Content Area */}
+      {/* 2. Main Stage Content Area (Full Vertical Screen Height, Zero Clutter) */}
       <main className="flex-1 overflow-hidden relative">
         {currentTab === 'all-tools' && (
           <PdfellaAllToolsHub
@@ -80,17 +77,19 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* 4. Bottom Studio Brand Bar */}
+      {/* 3. Bottom Studio Brand Bar */}
       <footer className="h-7 bg-white border-t border-slate-200/90 px-4 flex items-center justify-between text-xs text-slate-600 shadow-2xs select-none shrink-0">
         <div className="flex items-center gap-2 font-medium">
-          <span className="font-bold text-slate-900">DocuFlow Studio Pro</span>
-          <span className="font-mono text-[11px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200/80 font-semibold">
-            v26.10.30
+          <span className="font-extrabold text-slate-900 tracking-tight">PDF Master Pro</span>
+          <span className="font-mono text-[10.5px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200/80 font-semibold">
+            v1.0.0
           </span>
+          <span className="text-slate-300">•</span>
+          <span className="text-[11px] text-slate-500">Universal PDF Engineering Workstation</span>
         </div>
 
-        <div className="font-medium text-slate-700">
-          <span>Burhanuddin Sounasath</span>
+        <div className="font-medium text-slate-700 text-[11px]">
+          <span>Developer: <strong className="text-slate-900 font-semibold">Burhanuddin Sounasath</strong></span>
         </div>
       </footer>
     </div>
