@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { TitleBar } from './components/ui/TitleBar';
-import { NavigationRibbon } from './components/ui/NavigationRibbon';
 import { PdfellaAllToolsHub } from './components/features/PdfellaAllToolsHub';
 import { ContextSmartWorkspace } from './components/features/ContextSmartWorkspace';
 import { PdfEditorStudio } from './components/features/PdfEditorStudio';
@@ -20,16 +19,14 @@ export const App: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen w-screen bg-[#F8FAFC] text-slate-800 select-none overflow-hidden font-sans">
-      {/* 1. Light Studio TitleBar */}
-      <TitleBar queueCount={activeQueueCount} />
-
-      {/* 2. PDF Master Tool Directory Ribbon */}
-      <NavigationRibbon
+      {/* 1. Unified Light Studio TitleBar & Navigation */}
+      <TitleBar 
+        queueCount={activeQueueCount} 
         currentTab={currentTab}
-        onTabChange={(tab) => setCurrentTab(tab)}
+        onSelectTab={(tab) => setCurrentTab(tab)}
       />
 
-      {/* 3. Main Stage Content Area */}
+      {/* 2. Main Stage Content Area (Full Vertical Screen Height, Zero Clutter) */}
       <main className="flex-1 overflow-hidden relative">
         {currentTab === 'all-tools' && (
           <PdfellaAllToolsHub
@@ -80,7 +77,7 @@ export const App: React.FC = () => {
         )}
       </main>
 
-      {/* 4. Bottom Studio Brand Bar */}
+      {/* 3. Bottom Studio Brand Bar */}
       <footer className="h-7 bg-white border-t border-slate-200/90 px-4 flex items-center justify-between text-xs text-slate-600 shadow-2xs select-none shrink-0">
         <div className="flex items-center gap-2 font-medium">
           <span className="font-extrabold text-slate-900 tracking-tight">PDF Master Pro</span>
