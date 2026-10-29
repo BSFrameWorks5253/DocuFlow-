@@ -80,12 +80,12 @@ export const App: React.FC = () => {
       {/* 3. Bottom Studio Brand Bar */}
       <footer className="h-7 bg-white border-t border-slate-200/90 px-4 flex items-center justify-between text-xs text-slate-600 shadow-2xs select-none shrink-0">
         <div className="flex items-center gap-2 font-medium">
-          <span className="font-extrabold text-slate-900 tracking-tight">PDF Master Pro</span>
+          <span className="font-extrabold text-slate-900 tracking-tight">VectorForge Studio</span>
           <span className="font-mono text-[10.5px] px-1.5 py-0.5 rounded bg-slate-100 text-slate-600 border border-slate-200/80 font-semibold">
             v1.0.0
           </span>
           <span className="text-slate-300">•</span>
-          <span className="text-[11px] text-slate-500">Universal PDF Engineering Workstation</span>
+          <span className="text-[11px] text-slate-500">Precision Vector & Document Engineering Workstation</span>
         </div>
 
         <div className="font-medium text-slate-700 text-[11px]">

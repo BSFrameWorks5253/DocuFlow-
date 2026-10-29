@@ -30,10 +30,10 @@ const token = process.argv[2] || process.env.GH_TOKEN || process.env.GITHUB_TOKE
 const pkg = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8'));
 const version = pkg.version || '1.0.0';
 const TAG_NAME = `v${version}`;
-const RELEASE_TITLE = `PDF Master Pro v${version}`;
+const RELEASE_TITLE = `VectorForge Studio v${version}`;
 
 if (!token) {
-  console.log('\n⚠️  [PDF Master Auto-Release] No GitHub Token found.');
+  console.log('\n⚠️  [VectorForge Auto-Release] No GitHub Token found.');
   console.log('   Add GH_TOKEN=your_token to your .env file, or pass it via:');
   console.log('   node scripts/publish-release.cjs <TOKEN>\n');
   process.exit(0); // Exit cleanly so build doesn't break if building without token

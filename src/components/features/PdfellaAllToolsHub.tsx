@@ -421,19 +421,19 @@ export const PdfellaAllToolsHub: React.FC<PdfellaAllToolsHubProps> = ({
         {/* TOP BRAND HERO */}
         <div className="flex flex-col items-center text-center space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200/90 shadow-2xs text-xs font-semibold text-slate-700">
-            <span className="size-2 rounded-full bg-indigo-600 animate-pulse"></span>
-            <span className="font-extrabold text-slate-900 tracking-tight">PDF Master Pro</span>
+            <span className="size-2 rounded-full bg-cyan-500 animate-pulse"></span>
+            <span className="font-extrabold text-slate-900 tracking-tight">VectorForge Studio</span>
             <span className="text-slate-300">•</span>
-            <span className="font-mono text-slate-500 text-[11px]">v26.10.26</span>
+            <span className="font-mono text-slate-500 text-[11px]">v1.0.0</span>
             <span className="text-slate-300">•</span>
-            <span className="text-indigo-600 font-medium">Universal Engineering Studio</span>
+            <span className="text-cyan-700 font-medium">Precision Document & CAD Engine</span>
           </div>
 
           <h1 className="text-3xl md:text-4xl font-black tracking-tight text-slate-900">
-            Master Every Document & PDF
+            Forge Any Document & Vector Blueprint
           </h1>
           <p className="text-sm text-slate-500 max-w-xl mx-auto leading-relaxed">
-            Direct in-place vector PDF editing, AutoCAD DWG/DXF blueprints, multi-format fusion, and 100% private client-side processing.
+            In-place vector PDF editing, AutoCAD DWG/DXF blueprints, universal multi-format fusion, and 100% offline client-side privacy.
           </p>
         </div>
 

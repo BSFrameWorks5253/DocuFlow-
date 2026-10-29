@@ -94,7 +94,7 @@ export const TitleBar: React.FC<TitleBarProps> = ({
         setUpdateData(res);
         setUpdateModalOpen(true);
       } else {
-        alert('You are already running the latest version of PDF Master Pro!');
+        alert('You are already running the latest version of VectorForge Studio!');
       }
     } catch (e: any) {
       console.warn('Manual check error:', e);
@@ -150,12 +150,12 @@ export const TitleBar: React.FC<TitleBarProps> = ({
           {currentTab === 'all-tools' ? (
             /* Home / Dashboard Brand */
             <div className="flex items-center gap-2.5">
-              <div className="size-7 rounded-lg bg-gradient-to-br from-slate-900 to-indigo-950 border border-indigo-500/40 flex items-center justify-center shadow-xs text-indigo-400 font-black text-[12px] tracking-tight select-none">
-                PM
+              <div className="size-7 rounded-lg bg-gradient-to-br from-indigo-950 via-slate-900 to-cyan-950 border border-cyan-500/40 flex items-center justify-center shadow-xs text-cyan-400 font-black text-[11.5px] tracking-tight select-none">
+                VF
               </div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-[13.5px] tracking-tight text-slate-900 flex items-center gap-1.5">
-                  PDF Master <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md bg-indigo-50 text-indigo-600 border border-indigo-200 uppercase tracking-wider">PRO</span>
+                  VectorForge <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md bg-cyan-50 text-cyan-700 border border-cyan-200 uppercase tracking-wider">STUDIO</span>
                 </span>
                 <span className="font-mono text-[10.5px] text-slate-400 font-semibold">
                   v1.0.0

@@ -1,8 +1,8 @@
 {
-  "name": "pdf-master-pro",
+  "name": "vectorforge-studio",
   "private": true,
-  "version": "26.10.30",
-  "description": "DocuFlow Studio Pro \u2014 Universal Document Fusion & PDF Engineering Workstation for Anything",
+  "version": "1.0.0",
+  "description": "VectorForge Studio — Precision Vector PDF & Document Engineering Workstation",
   "author": "Burhanuddin Sounasath",
   "type": "module",
   "main": "electron-dist/main.js",
@@ -43,7 +43,7 @@
       ]
     },
     "portable": {
-      "artifactName": "PDF_Master_Pro_${version}.${ext}"
+      "artifactName": "VectorForge_Studio_${version}.${ext}"
     },
     "nsis": {
       "oneClick": false,
@@ -51,8 +51,8 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "PDF Master Pro",
-      "artifactName": "PDF_Master_Pro_${version}_Setup.${ext}"
+      "shortcutName": "VectorForge Studio",
+      "artifactName": "VectorForge_Studio_${version}_Setup.${ext}"
     }
   },
   "dependencies": {
