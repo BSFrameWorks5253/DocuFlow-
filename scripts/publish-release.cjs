@@ -5,7 +5,7 @@ const https = require('https');
 const { execSync } = require('child_process');
 
 const REPO_OWNER = 'BSFrameWorks5253';
-const REPO_NAME = 'DocuFlow-';
+const REPO_NAME = 'VectorForge';
 
 // 1. Try to load token from .env file if not in process.env
 const envPath = path.join(__dirname, '..', '.env');
@@ -168,8 +168,25 @@ async function main() {
   });
 
   if (existingRes.status === 200 && existingRes.data?.id) {
-    console.log(`ℹ️ Existing release found (ID: ${existingRes.data.id}). Updating assets...`);
-    release = existingRes.data;
+    console.log(`ℹ️ Existing release found (ID: ${existingRes.data.id}). Updating title & assets...`);
+    const patchRes = await request(
+      {
+        hostname: 'api.github.com',
+        path: `/repos/${REPO_OWNER}/${REPO_NAME}/releases/${existingRes.data.id}`,
+        method: 'PATCH',
+        headers: {
+          'User-Agent': 'VectorForge-Publisher',
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        }
+      },
+      {
+        name: RELEASE_TITLE,
+        body: body
+      }
+    );
+    release = patchRes.data || existingRes.data;
   } else {
     console.log(`✨ Creating release ${TAG_NAME}...`);
     const createRes = await request(
@@ -217,15 +234,12 @@ async function main() {
 
   // 3. Find files to upload
   const releaseDir = path.join(__dirname, '..', 'release');
-  let filesToUpload = [];
-  if (fs.existsSync(releaseDir)) {
-    filesToUpload = fs.readdirSync(releaseDir).filter(f => f.endsWith('.exe') && !f.includes('unpacked'));
-  }
-  if (filesToUpload.length === 0) {
-    filesToUpload = [
-      `PDF_Master_Pro_${version}_Setup.exe`,
-      `PDF_Master_Pro_${version}.exe`
-    ];
+  let filesToUpload = [
+    `VectorForge_Studio_${version}_Setup.exe`,
+    `VectorForge_Studio_${version}.exe`
+  ];
+  if (!fs.existsSync(path.join(releaseDir, filesToUpload[0]))) {
+    filesToUpload = fs.readdirSync(releaseDir).filter(f => f.includes('VectorForge') && f.endsWith('.exe'));
   }
 
   let uploadedCount = 0;
