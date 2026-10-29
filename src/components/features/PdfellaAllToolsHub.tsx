@@ -424,7 +424,7 @@ export const PdfellaAllToolsHub: React.FC<PdfellaAllToolsHubProps> = ({
             <span className="size-2 rounded-full bg-indigo-600 animate-pulse"></span>
             <span className="font-extrabold text-slate-900 tracking-tight">PDF Master Pro</span>
             <span className="text-slate-300">•</span>
-            <span className="font-mono text-slate-500 text-[11px]">v1.0.0</span>
+            <span className="font-mono text-slate-500 text-[11px]">v26.10.26</span>
             <span className="text-slate-300">•</span>
             <span className="text-indigo-600 font-medium">Universal Engineering Studio</span>
           </div>

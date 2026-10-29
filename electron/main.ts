@@ -210,3 +210,19 @@ ipcMain.handle('cad-convert-dwg-to-dxf', async (_event, dwgBuffer: ArrayBuffer) 
     return { success: false, error: err.message || 'AutoCAD DWG conversion failed' };
   }
 });
+
+// Auto-Updater Integration for Anything Ecosystem & GitHub Releases
+import { DocuFlowAutoUpdater } from './autoUpdater';
+
+ipcMain.handle('update:check', async (_event, customAnythingDir?: string) => {
+  return await DocuFlowAutoUpdater.checkForUpdates(mainWindow, customAnythingDir);
+});
+
+ipcMain.handle('update:download', async (_event, { downloadUrl, setupName }) => {
+  return await DocuFlowAutoUpdater.downloadUpdate(downloadUrl, setupName, mainWindow);
+});
+
+ipcMain.handle('update:install', async (_event, installerPath?: string) => {
+  DocuFlowAutoUpdater.installUpdate(installerPath);
+  return { success: true };
+});

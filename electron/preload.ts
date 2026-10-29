@@ -16,5 +16,23 @@ contextBridge.exposeInMainWorld('electronAPI', {
   saveFilesBatch: (options: { baseDir: string; subFolder?: string; files: Array<{ name: string; buffer: ArrayBuffer }> }) =>
     ipcRenderer.invoke('save-files-batch', options),
   convertDwgToDxf: (dwgBuffer: ArrayBuffer) =>
-    ipcRenderer.invoke('cad-convert-dwg-to-dxf', dwgBuffer)
+    ipcRenderer.invoke('cad-convert-dwg-to-dxf', dwgBuffer),
+  checkForUpdates: (customDir?: string) => ipcRenderer.invoke('update:check', customDir),
+  downloadUpdate: (options: { downloadUrl: string; setupName: string }) => ipcRenderer.invoke('update:download', options),
+  installUpdate: (installerPath?: string) => ipcRenderer.invoke('update:install', installerPath),
+  onUpdateAvailable: (callback: (data: any) => void) => {
+    const handler = (_: any, data: any) => callback(data);
+    ipcRenderer.on('update:available', handler);
+    return () => ipcRenderer.removeListener('update:available', handler);
+  },
+  onUpdateProgress: (callback: (data: any) => void) => {
+    const handler = (_: any, data: any) => callback(data);
+    ipcRenderer.on('update:progress', handler);
+    return () => ipcRenderer.removeListener('update:progress', handler);
+  },
+  onUpdateDownloaded: (callback: (data: any) => void) => {
+    const handler = (_: any, data: any) => callback(data);
+    ipcRenderer.on('update:downloaded', handler);
+    return () => ipcRenderer.removeListener('update:downloaded', handler);
+  }
 });
